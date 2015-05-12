@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="HardcodedText">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_share_plain_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="Share plain text note"/>
+
+        <Button
+            android:id="@+id/button_share_html"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="Share HTML"/>
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="Search"/>
+
+        <Button
+            android:id="@+id/button_view_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="View note"/>
+
+        <Button
+            android:id="@+id/button_new_snapshot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="New snapshot"/>
+
+        <Button
+            android:id="@+id/button_new_voice_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="New voice note"/>
+
+        <Button
+            android:id="@+id/button_new_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="New search"/>
+
+    </LinearLayout>
+
+</ScrollView>
