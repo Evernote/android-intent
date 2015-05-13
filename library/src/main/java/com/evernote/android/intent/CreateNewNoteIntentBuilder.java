@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author rwondratschek
  */
 @SuppressWarnings("unused")
-public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNoteIntentBuilder> {
+public final class CreateNewNoteIntentBuilder extends IntentBuilder {
 
     /*package*/ CreateNewNoteIntentBuilder() {
         super(EvernoteIntent.ACTION_CREATE_NEW_NOTE);
@@ -24,7 +24,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
      * @see Intent#EXTRA_TITLE
      */
     public CreateNewNoteIntentBuilder setTitle(@Nullable String title) {
-        return putString(Intent.EXTRA_TITLE, title);
+        putString(Intent.EXTRA_TITLE, title);
+        return this;
     }
 
     /**
@@ -33,7 +34,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
      * @see Intent#EXTRA_TEXT
      */
     public CreateNewNoteIntentBuilder setTextPlain(@Nullable String plainText) {
-        return putString(Intent.EXTRA_TEXT, plainText);
+        putString(Intent.EXTRA_TEXT, plainText);
+        return this;
     }
 
     /**
@@ -42,7 +44,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setNotebookGuid(@Nullable String notebookGuid) {
-        return putString(EvernoteIntent.EXTRA_NOTEBOOK_GUID, notebookGuid);
+        putString(EvernoteIntent.EXTRA_NOTEBOOK_GUID, notebookGuid);
+        return this;
     }
 
     /**
@@ -93,7 +96,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setTags(@Nullable ArrayList<String> tags) {
-        return putStringArrayList(EvernoteIntent.EXTRA_TAG_NAME_LIST, tags);
+        putStringArrayList(EvernoteIntent.EXTRA_TAG_NAME_LIST, tags);
+        return this;
     }
 
     /**
@@ -101,7 +105,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setAuthor(@Nullable String author) {
-        return putString(EvernoteIntent.EXTRA_AUTHOR, author);
+        putString(EvernoteIntent.EXTRA_AUTHOR, author);
+        return this;
     }
 
     /**
@@ -109,7 +114,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setSourceUrl(@Nullable String sourceUrl) {
-        return putString(EvernoteIntent.EXTRA_SOURCE_URL, sourceUrl);
+        putString(EvernoteIntent.EXTRA_SOURCE_URL, sourceUrl);
+        return this;
     }
 
     /**
@@ -117,7 +123,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setSourceApp(@Nullable String sourceApp) {
-        return putString(EvernoteIntent.EXTRA_SOURCE_APP, sourceApp);
+        putString(EvernoteIntent.EXTRA_SOURCE_APP, sourceApp);
+        return this;
     }
 
     /**
@@ -203,7 +210,8 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNot
         }
 
         putString(Intent.EXTRA_TEXT, html);
-        return putString(EvernoteIntent.EXTRA_BASE_URL, baseUrl);
+        putString(EvernoteIntent.EXTRA_BASE_URL, baseUrl);
+        return this;
     }
 
     /**

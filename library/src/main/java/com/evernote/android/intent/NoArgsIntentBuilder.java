@@ -5,7 +5,7 @@ package com.evernote.android.intent;
  *
  * @author rwondratschek
  */
-public class NoArgsIntentBuilder extends IntentBuilder<NoArgsIntentBuilder> {
+public class NoArgsIntentBuilder extends IntentBuilder {
 
     /*package*/ NoArgsIntentBuilder(String action) {
         super(action);

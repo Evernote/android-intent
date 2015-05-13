@@ -61,7 +61,7 @@ public final class EvernoteIntent {
      *
      * @return An empty builder object, which doesn't accept additional parameters.
      */
-    public static NoArgsIntentBuilder newSnapshot() {
+    public static IntentBuilder newSnapshot() {
         return new NoArgsIntentBuilder(ACTION_NEW_SNAPSHOT);
     }
 
@@ -70,7 +70,7 @@ public final class EvernoteIntent {
      *
      * @return An empty builder object, which doesn't accept additional parameters.
      */
-    public static NoArgsIntentBuilder newVoiceNote() {
+    public static IntentBuilder newVoiceNote() {
         return new NoArgsIntentBuilder(ACTION_NEW_VOICE_NOTE);
     }
 
@@ -79,7 +79,7 @@ public final class EvernoteIntent {
      *
      * @return An empty builder object, which doesn't accept additional parameters.
      */
-    public static NoArgsIntentBuilder newSearch() {
+    public static IntentBuilder newSearch() {
         return new NoArgsIntentBuilder(ACTION_SEARCH);
     }
 

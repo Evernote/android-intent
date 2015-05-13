@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * @author rwondratschek
  */
-/*package*/ abstract class IntentBuilder<T extends IntentBuilder> {
+public abstract class IntentBuilder {
 
     protected final Intent mIntent;
     protected final Bundle mArgs;
@@ -26,23 +26,19 @@ import java.util.ArrayList;
         return mIntent;
     }
 
-    @SuppressWarnings("unchecked")
-    protected T putString(@NonNull String key, @Nullable String value) {
+    protected void putString(@NonNull String key, @Nullable String value) {
         if (TextUtils.isEmpty(value)) {
             mArgs.remove(key);
         } else {
             mArgs.putString(key, value);
         }
-        return (T) this;
     }
 
-    @SuppressWarnings("unchecked")
-    protected T putStringArrayList(@NonNull String key, @Nullable ArrayList<String> value) {
+    protected void putStringArrayList(@NonNull String key, @Nullable ArrayList<String> value) {
         if (value == null || value.isEmpty()) {
             mArgs.remove(key);
         } else {
             mArgs.putStringArrayList(key, value);
         }
-        return (T) this;
     }
 }

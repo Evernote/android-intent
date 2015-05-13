@@ -3,7 +3,7 @@ package com.evernote.android.intent;
 /**
  * @author rwondratschek
  */
-public class ViewNoteIntentBuilder extends IntentBuilder<ViewNoteIntentBuilder> {
+public class ViewNoteIntentBuilder extends IntentBuilder {
 
     /*package*/ ViewNoteIntentBuilder() {
         super(EvernoteIntent.ACTION_VIEW_NOTE);
@@ -15,7 +15,8 @@ public class ViewNoteIntentBuilder extends IntentBuilder<ViewNoteIntentBuilder> 
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public ViewNoteIntentBuilder setNoteGuid(String noteGuid) {
-        return putString(EvernoteIntent.EXTRA_NOTE_GUID, noteGuid);
+        putString(EvernoteIntent.EXTRA_NOTE_GUID, noteGuid);
+        return this;
     }
 
     /**
