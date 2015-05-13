@@ -1,8 +1,6 @@
 Evernote Android-Intent
 =======================
 
-Overview
---------
 This tiny library lets you easily send Android Intents to the main Evernote app.
 
 Download
@@ -31,7 +29,7 @@ private void sharePlainTextNote() {
             .addTags("Intent Demo Tag")
             .setTextPlain("This note is created by the Evernote intent demo application. https://github.com/evernote/android-intent")
             .setSourceApp("Intent demo app")
-            .setAppVisibility(EvernoteIntent.AppVisibility.QUICK_SEND)
+            .setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility.QUICK_SEND)
             .create();
 
     startActivity(intent);

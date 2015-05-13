@@ -1,5 +1,8 @@
 package com.evernote.android.intent;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+
 /**
  * This class serves as entry point to create Intents targeting the Evernote app.
  *
@@ -25,6 +28,8 @@ public final class EvernoteIntent {
     public static final String EXTRA_FORCE_NO_UI = "FORCE_NO_UI";
     public static final String EXTRA_QUICK_SEND = "QUICK_SEND";
     public static final String EXTRA_FULL_SCREEN  = "FULL_SCREEN";
+
+    private static final String PACKAGE_NAME = "com.evernote";
 
     private EvernoteIntent() {
         // no op
@@ -76,5 +81,19 @@ public final class EvernoteIntent {
      */
     public static NoArgsIntentBuilder newSearch() {
         return new NoArgsIntentBuilder(ACTION_SEARCH);
+    }
+
+    /**
+     * @return {@code true} if Evernote is installed and can be launched.
+     */
+    public static boolean isEvernoteInstalled(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            packageManager.getPackageInfo(PACKAGE_NAME, PackageManager.GET_ACTIVITIES);
+            return true;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 }

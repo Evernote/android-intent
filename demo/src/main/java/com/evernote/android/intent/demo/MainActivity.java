@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.evernote.android.intent.CreateNewNoteIntentBuilder;
 import com.evernote.android.intent.EvernoteIntent;
@@ -47,6 +48,10 @@ public class MainActivity extends Activity {
 
             case R.id.button_new_search:
                 newSearch();
+                break;
+
+            case R.id.button_is_installed:
+                checkIsInstalled();
                 break;
 
             default:
@@ -123,5 +128,9 @@ public class MainActivity extends Activity {
 
     private void newSearch() {
         startActivity(EvernoteIntent.newSearch().create());
+    }
+
+    private void checkIsInstalled() {
+        Toast.makeText(this, EvernoteIntent.isEvernoteInstalled(this) ? "Evernote is installed" : "Evernote is not installed", Toast.LENGTH_SHORT).show();
     }
 }

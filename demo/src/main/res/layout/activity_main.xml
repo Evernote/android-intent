@@ -67,6 +67,14 @@
             android:onClick="onButtonClick"
             android:text="New search"/>
 
+        <Button
+            android:id="@+id/button_is_installed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="Evernote installed"/>
+
     </LinearLayout>
 
 </ScrollView>
