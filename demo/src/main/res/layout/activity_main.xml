@@ -36,6 +36,14 @@
             android:text="Search"/>
 
         <Button
+            android:id="@+id/button_pick_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="Pick note"/>
+
+        <Button
             android:id="@+id/button_view_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

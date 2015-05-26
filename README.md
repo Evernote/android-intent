@@ -10,7 +10,7 @@ Add the library as a dependency in your build.gradle file.
 
 ```groovy
 dependencies {
-    compile 'com.evernote:android-intent:1.0.0'
+    compile 'com.evernote:android-intent:1.0.1'
 }
 ```
 
@@ -34,6 +34,28 @@ private void sharePlainTextNote() {
 
     startActivity(intent);
 }
+```
+
+For some Intents the Evernote app returns a result, e.g. if you pick note. In this case you can use `EvernoteIntentResult` to parse the data.
+
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch (requestCode) {
+        case REQ_PICK_NOTE:
+            if (resultCode != RESULT_OK || data == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                mNoteGuid = EvernoteIntentResult.getNoteGuid(data);
+            }
+            break;
+
+        default:
+            super.onActivityResult(requestCode, resultCode, data);
+            break;
+    }
+}
+
 ```
 
 License

@@ -3,21 +3,59 @@ package com.evernote.android.intent.demo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import com.evernote.android.intent.CreateNewNoteIntentBuilder;
 import com.evernote.android.intent.EvernoteIntent;
+import com.evernote.android.intent.EvernoteIntentResult;
 
 /**
  * @author rwondratschek
  */
 public class MainActivity extends Activity {
 
+    private static final String KEY_NOTE_GUID = "KEY_NOTE_GUID";
+
+    private static final int REQ_PICK_NOTE = 200;
+
+    private String mNoteGuid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null) {
+            mNoteGuid = savedInstanceState.getString(KEY_NOTE_GUID);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (!TextUtils.isEmpty(mNoteGuid)) {
+            outState.putString(KEY_NOTE_GUID, mNoteGuid);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQ_PICK_NOTE:
+                if (resultCode != RESULT_OK || data == null) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                } else {
+                    mNoteGuid = EvernoteIntentResult.getNoteGuid(data);
+                }
+                break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 
     public void onButtonClick(View view) {
@@ -32,6 +70,10 @@ public class MainActivity extends Activity {
 
             case R.id.button_search:
                 search();
+                break;
+
+            case R.id.button_pick_note:
+                pickNote();
                 break;
 
             case R.id.button_view_note:
@@ -109,9 +151,18 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    private void pickNote() {
+        startActivityForResult(EvernoteIntent.pickNote().create(), REQ_PICK_NOTE);
+    }
+
     private void viewNote() {
+        if (TextUtils.isEmpty(mNoteGuid)) {
+            Toast.makeText(this, "Pick a note first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent intent = EvernoteIntent.viewNote()
-                .setNoteGuid("any guid")
+                .setNoteGuid(mNoteGuid)
                 .setFullScreen(true)
                 .create();
 

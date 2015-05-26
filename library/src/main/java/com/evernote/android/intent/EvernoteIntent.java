@@ -1,6 +1,8 @@
 package com.evernote.android.intent;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
 /**
@@ -16,6 +18,7 @@ public final class EvernoteIntent {
     public static final String ACTION_NEW_SNAPSHOT = "com.evernote.action.NEW_SNAPSHOT";
     public static final String ACTION_NEW_VOICE_NOTE = "com.evernote.action.NEW_VOICE_NOTE";
     public static final String ACTION_SEARCH = "com.evernote.action.SEARCH";
+    public static final String ACTION_NOTE_PICKER = "com.evernote.action.NOTE_PICKER";
 
     public static final String EXTRA_NOTE_GUID = "NOTE_GUID";
     public static final String EXTRA_NOTEBOOK_GUID = "NOTEBOOK_GUID";
@@ -81,6 +84,24 @@ public final class EvernoteIntent {
      */
     public static IntentBuilder newSearch() {
         return new NoArgsIntentBuilder(ACTION_SEARCH);
+    }
+
+    /**
+     * The returned builder object doesn't accept additional parameters. This may change in the future.
+     *
+     * <br>
+     * <br>
+     *
+     * Call {@link Activity#startActivityForResult(Intent, int)} to fire this intent and override
+     * {@link Activity#onActivityResult(int, int, Intent)} to get the returned note. The returned data
+     * usually contains the note and notebook GUID.
+     *
+     * @return An empty builder object, which doesn't accept additional parameters.
+     * @see EvernoteIntentResult#getNoteGuid(Intent)
+     * @see EvernoteIntentResult#getNotebookGuid(Intent)
+     */
+    public static IntentBuilder pickNote() {
+        return new NoArgsIntentBuilder(ACTION_NOTE_PICKER);
     }
 
     /**
