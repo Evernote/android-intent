@@ -32,7 +32,7 @@ public final class EvernoteIntent {
     public static final String EXTRA_QUICK_SEND = "QUICK_SEND";
     public static final String EXTRA_FULL_SCREEN  = "FULL_SCREEN";
 
-    private static final String PACKAGE_NAME = "com.evernote";
+    public static final String PACKAGE_NAME = "com.evernote";
 
     private EvernoteIntent() {
         // no op

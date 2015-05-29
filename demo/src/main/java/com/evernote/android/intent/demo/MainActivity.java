@@ -2,15 +2,25 @@ package com.evernote.android.intent.demo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.evernote.android.intent.CreateNewNoteIntentBuilder;
 import com.evernote.android.intent.EvernoteIntent;
 import com.evernote.android.intent.EvernoteIntentResult;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author rwondratschek
@@ -102,6 +112,21 @@ public class MainActivity extends Activity {
     }
 
     private void sharePlainTextNote() {
+        ArrayList<Uri> images = new ArrayList<>();
+
+        try {
+            Uri uri = createTempImage();
+            grantUriPermission(EvernoteIntent.PACKAGE_NAME, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            for (int i = 0; i < 3; i++) {
+                images.add(uri);
+            }
+
+        } catch (IOException e) {
+            Toast.makeText(this, "Could not attach image", Toast.LENGTH_SHORT).show();
+            Log.e("Demo", "IOException", e);
+        }
+
         Intent intent = EvernoteIntent.createNewNote()
                 .setTitle("Intent Demo Title")
                 .setAuthor("Intent demo app")
@@ -109,6 +134,7 @@ public class MainActivity extends Activity {
                 .setTextPlain("This note is created by the Evernote intent demo application. https://github.com/evernote/android-intent")
                 .setSourceApp("Intent demo app")
                 .setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility.QUICK_SEND)
+                .setUris(images, "image/*")
                 .create();
 
         startActivity(intent);
@@ -183,5 +209,35 @@ public class MainActivity extends Activity {
 
     private void checkIsInstalled() {
         Toast.makeText(this, EvernoteIntent.isEvernoteInstalled(this) ? "Evernote is installed" : "Evernote is not installed", Toast.LENGTH_SHORT).show();
+    }
+
+    private Uri createTempImage() throws IOException {
+        File file = new File(new File(getCacheDir(), "share"), "test1.jpeg");
+        if (file.exists()) {
+            return FileProvider.getUriForFile(this, "com.evernote.android.intent.demo.fileprovider", file);
+        }
+
+        if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+            throw new IOException();
+        }
+
+        if (!file.exists() && !file.createNewFile()) {
+            throw new IOException();
+        }
+
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(file);
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+
+            return FileProvider.getUriForFile(this, "com.evernote.android.intent.demo.fileprovider", file);
+
+        } finally {
+            if (fileOutputStream != null) {
+                fileOutputStream.close();
+            }
+        }
     }
 }

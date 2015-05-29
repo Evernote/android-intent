@@ -1,6 +1,7 @@
 = 1.0.1 / 2015-5-26
 
 * pick note
+* add attachment in new note in demo
 
 = 1.0.0 / 2015-5-13
 
