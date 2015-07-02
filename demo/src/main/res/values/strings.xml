@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Intent Demo</string>
+    <string name="evernote_not_installed">Evernote not installed.</string>
 </resources>

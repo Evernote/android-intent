@@ -69,6 +69,11 @@ public class MainActivity extends Activity {
     }
 
     public void onButtonClick(View view) {
+        if (!EvernoteIntent.isEvernoteInstalled(this)) {
+            Toast.makeText(this, R.string.evernote_not_installed, Toast.LENGTH_LONG).show();
+            return;
+        }
+
         switch (view.getId()) {
             case R.id.button_share_plain_text:
                 sharePlainTextNote();
