@@ -28,6 +28,14 @@
             android:text="Share HTML"/>
 
         <Button
+            android:id="@+id/button_share_enex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/simple_offset"
+            android:onClick="onButtonClick"
+            android:text="Share ENEX"/>
+
+        <Button
             android:id="@+id/button_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
