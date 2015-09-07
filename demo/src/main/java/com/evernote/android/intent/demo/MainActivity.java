@@ -202,8 +202,8 @@ public class MainActivity extends Activity {
             return;
         }
 
-        Intent intent = EvernoteIntent.createNewNote()
-                .setUri(localEnexFile, "application/enex")
+        Intent intent = EvernoteIntent.importEnexFile()
+                .setEnexFile(localEnexFile)
                 .setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility.QUICK_SEND)
                 .create();
 

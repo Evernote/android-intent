@@ -10,7 +10,7 @@ Add the library as a dependency in your build.gradle file.
 
 ```groovy
 dependencies {
-    compile 'com.evernote:android-intent:1.0.1'
+    compile 'com.evernote:android-intent:1.0.2'
 }
 ```
 
