@@ -10,7 +10,7 @@ Add the library as a dependency in your build.gradle file.
 
 ```groovy
 dependencies {
-    compile 'com.evernote:android-intent:1.0.2'
+    compile 'com.evernote:android-intent:1.0.3'
 }
 ```
 
@@ -25,10 +25,9 @@ Some returned builders provide additional parameters.
 private void sharePlainTextNote() {
     Intent intent = EvernoteIntent.createNewNote()
             .setTitle("Intent Demo Title")
-            .setAuthor("Intent demo app")
             .addTags("Intent Demo Tag")
             .setTextPlain("This note is created by the Evernote intent demo application. https://github.com/evernote/android-intent")
-            .setSourceApp("Intent demo app")
+            .setSourceApp(getPackageName())
             .setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility.QUICK_SEND)
             .create();
 

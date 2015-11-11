@@ -144,10 +144,9 @@ public class MainActivity extends Activity {
 
         Intent intent = EvernoteIntent.createNewNote()
                 .setTitle("Intent Demo Title")
-                .setAuthor("Intent demo app")
                 .addTags("Intent Demo Tag")
                 .setTextPlain("This note is created by the Evernote intent demo application. https://github.com/evernote/android-intent")
-                .setSourceApp("Intent demo app")
+                .setSourceApp(getPackageName())
                 .setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility.QUICK_SEND)
                 .setUris(images, "image/*")
                 .create();
@@ -177,7 +176,7 @@ public class MainActivity extends Activity {
                 .setTitle("Share HTML")
                 .addTags("Intent Demo Tag")
                 .setTextHtml(html, "https://blogassets.evernote.com")
-                .setSourceApp("Intent demo app")
+                .setSourceApp(getPackageName())
                 .setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility.QUICK_SEND)
                 .create();
 

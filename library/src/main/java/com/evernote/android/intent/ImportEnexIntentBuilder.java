@@ -35,7 +35,7 @@ import java.util.ArrayList;
  * @author rwondratschek
  */
 @SuppressWarnings("unused")
-public final class ImportEnexIntentBuilder extends IntentBuilder {
+public final class ImportEnexIntentBuilder extends IntentBuilder<ImportEnexIntentBuilder> {
 
     /*package*/ ImportEnexIntentBuilder() {
         super(EvernoteIntent.ACTION_CREATE_NEW_NOTE);
@@ -57,13 +57,7 @@ public final class ImportEnexIntentBuilder extends IntentBuilder {
      * @see Intent#EXTRA_STREAM
      */
     public ImportEnexIntentBuilder setEnexFile(@Nullable Uri uri) {
-        if (uri == null) {
-            return setEnexFiles(null);
-        } else {
-            mIntent.setType(EvernoteIntent.MIME_TYPE_ENEX);
-            mArgs.putParcelable(Intent.EXTRA_STREAM, uri);
-            return this;
-        }
+        return setUri(uri, EvernoteIntent.MIME_TYPE_ENEX);
     }
 
     /**
@@ -73,15 +67,7 @@ public final class ImportEnexIntentBuilder extends IntentBuilder {
      * @see Intent#EXTRA_STREAM
      */
     public ImportEnexIntentBuilder setEnexFiles(@Nullable ArrayList<Uri> uris) {
-        if (uris == null || uris.isEmpty()) {
-            mIntent.setType(null);
-            mArgs.remove(Intent.EXTRA_STREAM);
-
-        } else {
-            mIntent.setType(EvernoteIntent.MIME_TYPE_ENEX);
-            mArgs.putParcelableArrayList(Intent.EXTRA_STREAM, uris);
-        }
-        return this;
+        return setUris(uris, EvernoteIntent.MIME_TYPE_ENEX);
     }
 
     /**
@@ -92,6 +78,11 @@ public final class ImportEnexIntentBuilder extends IntentBuilder {
      */
     public ImportEnexIntentBuilder setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility visibility) {
         CreateNewNoteIntentBuilder.setAppVisibility(mArgs, visibility);
+        return this;
+    }
+
+    @Override
+    protected ImportEnexIntentBuilder self() {
         return this;
     }
 }

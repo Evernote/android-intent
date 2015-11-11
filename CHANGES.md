@@ -1,4 +1,8 @@
-## 1.0.1 (2015-09-07)
+## 1.0.3 (2015-11-11)
+ 
+* remove option to set the 'author'
+
+## 1.0.2 (2015-09-07)
 
 * add concrete intent builder for enex import
 

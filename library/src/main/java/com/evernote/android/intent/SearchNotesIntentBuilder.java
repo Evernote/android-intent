@@ -31,7 +31,7 @@ import android.support.annotation.Nullable;
 /**
  * @author rwondratschek
  */
-public final class SearchNotesIntentBuilder extends IntentBuilder {
+public final class SearchNotesIntentBuilder extends IntentBuilder<SearchNotesIntentBuilder> {
 
     /*package*/ SearchNotesIntentBuilder() {
         super(EvernoteIntent.ACTION_SEARCH_NOTES);
@@ -42,9 +42,11 @@ public final class SearchNotesIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public SearchNotesIntentBuilder setQuery(@Nullable String query) {
-        putString(SearchManager.QUERY, query);
-        return this;
+        return putString(SearchManager.QUERY, query);
     }
 
-
+    @Override
+    protected SearchNotesIntentBuilder self() {
+        return this;
+    }
 }

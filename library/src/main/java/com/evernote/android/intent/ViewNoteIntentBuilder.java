@@ -28,7 +28,7 @@ package com.evernote.android.intent;
 /**
  * @author rwondratschek
  */
-public class ViewNoteIntentBuilder extends IntentBuilder {
+public class ViewNoteIntentBuilder extends IntentBuilder<ViewNoteIntentBuilder> {
 
     /*package*/ ViewNoteIntentBuilder() {
         super(EvernoteIntent.ACTION_VIEW_NOTE);
@@ -40,8 +40,7 @@ public class ViewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public ViewNoteIntentBuilder setNoteGuid(String noteGuid) {
-        putString(EvernoteIntent.EXTRA_NOTE_GUID, noteGuid);
-        return this;
+        return putString(EvernoteIntent.EXTRA_NOTE_GUID, noteGuid);
     }
 
     /**
@@ -49,8 +48,11 @@ public class ViewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public ViewNoteIntentBuilder setFullScreen(boolean fullScreen) {
-        mArgs.putBoolean(EvernoteIntent.EXTRA_FULL_SCREEN, fullScreen);
-        return this;
+        return putBoolean(EvernoteIntent.EXTRA_FULL_SCREEN, fullScreen);
     }
 
+    @Override
+    protected ViewNoteIntentBuilder self() {
+        return this;
+    }
 }

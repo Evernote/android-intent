@@ -48,7 +48,6 @@ public final class EvernoteIntent {
     public static final String EXTRA_NOTE_GUID = "NOTE_GUID";
     public static final String EXTRA_NOTEBOOK_GUID = "NOTEBOOK_GUID";
     public static final String EXTRA_TAG_NAME_LIST = "TAG_NAME_LIST";
-    public static final String EXTRA_AUTHOR = "AUTHOR";
     public static final String EXTRA_SOURCE_URL = "SOURCE_URL";
     public static final String EXTRA_SOURCE_APP = "SOURCE_APP";
     public static final String EXTRA_BASE_URL = "BASE_URL";

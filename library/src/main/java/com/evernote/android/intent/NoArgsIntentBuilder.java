@@ -30,9 +30,14 @@ package com.evernote.android.intent;
  *
  * @author rwondratschek
  */
-public class NoArgsIntentBuilder extends IntentBuilder {
+public class NoArgsIntentBuilder extends IntentBuilder<NoArgsIntentBuilder> {
 
     /*package*/ NoArgsIntentBuilder(String action) {
         super(action);
+    }
+
+    @Override
+    protected NoArgsIntentBuilder self() {
+        return this;
     }
 }

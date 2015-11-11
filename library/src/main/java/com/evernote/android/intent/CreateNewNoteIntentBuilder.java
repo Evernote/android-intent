@@ -38,7 +38,7 @@ import java.util.Arrays;
  * @author rwondratschek
  */
 @SuppressWarnings("unused")
-public final class CreateNewNoteIntentBuilder extends IntentBuilder {
+public final class CreateNewNoteIntentBuilder extends IntentBuilder<CreateNewNoteIntentBuilder> {
 
     /*package*/ CreateNewNoteIntentBuilder() {
         super(EvernoteIntent.ACTION_CREATE_NEW_NOTE);
@@ -50,8 +50,7 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @see Intent#EXTRA_TITLE
      */
     public CreateNewNoteIntentBuilder setTitle(@Nullable String title) {
-        putString(Intent.EXTRA_TITLE, title);
-        return this;
+        return putString(Intent.EXTRA_TITLE, title);
     }
 
     /**
@@ -60,8 +59,7 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @see Intent#EXTRA_TEXT
      */
     public CreateNewNoteIntentBuilder setTextPlain(@Nullable String plainText) {
-        putString(Intent.EXTRA_TEXT, plainText);
-        return this;
+        return putString(Intent.EXTRA_TEXT, plainText);
     }
 
     /**
@@ -70,8 +68,7 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setNotebookGuid(@Nullable String notebookGuid) {
-        putString(EvernoteIntent.EXTRA_NOTEBOOK_GUID, notebookGuid);
-        return this;
+        return putString(EvernoteIntent.EXTRA_NOTEBOOK_GUID, notebookGuid);
     }
 
     /**
@@ -122,16 +119,17 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setTags(@Nullable ArrayList<String> tags) {
-        putStringArrayList(EvernoteIntent.EXTRA_TAG_NAME_LIST, tags);
-        return this;
+        return putStringArrayList(EvernoteIntent.EXTRA_TAG_NAME_LIST, tags);
     }
 
     /**
      * @param author The author of the new note. If {@code null} then the current value gets removed.
      * @return This Builder object to allow for chaining of calls to set methods.
+     * @deprecated Use {@link #setSourceApp(String)} instead to identify your note later. This method
+     * does nothing anymore.
      */
+    @Deprecated
     public CreateNewNoteIntentBuilder setAuthor(@Nullable String author) {
-        putString(EvernoteIntent.EXTRA_AUTHOR, author);
         return this;
     }
 
@@ -140,8 +138,7 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setSourceUrl(@Nullable String sourceUrl) {
-        putString(EvernoteIntent.EXTRA_SOURCE_URL, sourceUrl);
-        return this;
+        return putString(EvernoteIntent.EXTRA_SOURCE_URL, sourceUrl);
     }
 
     /**
@@ -149,8 +146,7 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      */
     public CreateNewNoteIntentBuilder setSourceApp(@Nullable String sourceApp) {
-        putString(EvernoteIntent.EXTRA_SOURCE_APP, sourceApp);
-        return this;
+        return putString(EvernoteIntent.EXTRA_SOURCE_APP, sourceApp);
     }
 
     /**
@@ -159,14 +155,9 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      * @see Intent#EXTRA_STREAM
      */
+    @Override
     public CreateNewNoteIntentBuilder setUri(@Nullable Uri uri, @Nullable String mimeType) {
-        if (uri == null || TextUtils.isEmpty(mimeType)) {
-            return setUris(null, null);
-        } else {
-            mIntent.setType(mimeType);
-            mArgs.putParcelable(Intent.EXTRA_STREAM, uri);
-            return this;
-        }
+        return super.setUri(uri, mimeType);
     }
 
     /**
@@ -176,16 +167,9 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      * @return This Builder object to allow for chaining of calls to set methods.
      * @see Intent#EXTRA_STREAM
      */
+    @Override
     public CreateNewNoteIntentBuilder setUris(@Nullable ArrayList<Uri> uris, @Nullable String mimeType) {
-        if (uris == null || uris.isEmpty() || TextUtils.isEmpty(mimeType)) {
-            mIntent.setType(null);
-            mArgs.remove(Intent.EXTRA_STREAM);
-
-        } else {
-            mIntent.setType(mimeType);
-            mArgs.putParcelableArrayList(Intent.EXTRA_STREAM, uris);
-        }
-        return this;
+        return super.setUris(uris, mimeType);
     }
 
     /**
@@ -236,8 +220,7 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
         }
 
         putString(Intent.EXTRA_TEXT, html);
-        putString(EvernoteIntent.EXTRA_BASE_URL, baseUrl);
-        return this;
+        return putString(EvernoteIntent.EXTRA_BASE_URL, baseUrl);
     }
 
     /**
@@ -248,6 +231,11 @@ public final class CreateNewNoteIntentBuilder extends IntentBuilder {
      */
     public CreateNewNoteIntentBuilder setAppVisibility(AppVisibility visibility) {
         setAppVisibility(mArgs, visibility);
+        return this;
+    }
+
+    @Override
+    protected CreateNewNoteIntentBuilder self() {
         return this;
     }
 
